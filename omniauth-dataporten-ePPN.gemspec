@@ -4,13 +4,22 @@ require File.expand_path(File.join('..', 'lib', 'omniauth-dataporten', 'version'
 Gem::Specification.new do |gem|
   gem.add_dependency 'omniauth', '~> 1.0'
 
-  gem.name          = 'omniauth-dataporten'
+  gem.name          = 'omniauth-dataporten-ePPN'
   gem.version       = Omniauth::Dataporten::VERSION
-  gem.authors       = ['kasperrt']
-  gem.email         = ['kasper@kasperrt.no']
-  gem.description   = %q{A Dataporten OAuth2 strategy for OmniAuth 1.x}
+  gem.license       = 'MIT'
+  gem.authors       = ['kasperrt', 'Lennart Nordgreen']
+  gem.email         = ['kasper@kasperrt.no', 'lennart.nordgreen@uib.no']
   gem.summary       = %q{A Dataporten OAuth2 strategy for OmniAuth 1.x}
-  gem.homepage      = 'https://github.com/kasperrt/omniauth-dataporten'
+  gem.description   = <<-DESCRIPTION 
+A Dataporten OAuth2 strategy for OmniAuth 1.x configured to use userid-feide scope (eduPersonPrincipalName) as uid/username.
+
+Scope mappings: 
+
+* Person -> Full Name/(profile picture (not in use))
+* Email -> User email
+* Userid-feide -> uid/username 
+                      DESCRIPTION
+  gem.homepage      = 'https://github.com/caleno/omniauth-dataporten'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

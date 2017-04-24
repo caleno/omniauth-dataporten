@@ -11,14 +11,33 @@ module OmniAuth
                     token_url: "/oauth/token"
             }
 
+      # This is where you pass the options you would pass when
+      # initializing your consumer from the OAuth gem.
+
             option :redirect_url
 
-            uid { raw_info['user']['userid'] }
+      # These are called after authentication has succeeded. If
+      # possible, you should try to set the UID without making
+      # additional calls (if the user id is returned with the token
+      # or as a URI parameter). This may not be possible with all
+      # providers.
+
+      # Extraction eduPPN from userid_sec ["feide:uid@edu.org"]
+
+            Rails.logger.debug(raw_info['user']['userid_sec'])
+
+            $federation, $eppn = { raw_info['user']['userid_sec'].split(':') }            
+
+            Rails.logger.debug($federation)
+            Rails.logger.debug($eppn)
+
+            uid = $eppn
+            #uid { raw_info['user']['userid_sec'] }
 
             info do
                 {
                     name:           raw_info['user']['name'],
-                    username:       raw_info['user']['userid'],
+                    username:       $eppn,
                     email:          raw_info['user']['email']
                     #image:          raw_info['user']['profilepicture']
                 }

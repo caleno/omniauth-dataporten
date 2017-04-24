@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'omniauth-dataporten'
+require 'omniauth-dataporten-ePPN'
 
 describe OmniAuth::Strategies::Dataporten do
 
